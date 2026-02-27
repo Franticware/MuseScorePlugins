@@ -50,8 +50,8 @@ MuseScore {
 //    dockArea:   "left"
 //
     pluginType: "dialog"
-    width: 370
-    height: 260
+    width: radioVals.implicitWidth
+    height: radioVals.implicitHeight
     id: chordDialog
     
     Component.onCompleted : {
@@ -979,6 +979,35 @@ MuseScore {
         ]
       }
 
+      RowLayout {
+          Layout.alignment: Qt.AlignRight
+          Layout.margins: 10
+          spacing: 20
+          Button {
+              id: buttonOK
+              text: qsTr("OK")
+              width: 100
+              height: 40
+              onClicked: {
+                  showVals()
+                  curScore.startCmd()
+                  runsheet()
+                  curScore.endCmd()
+                  quit()
+              }
+          }
+
+          Button {
+              id: buttonCancel
+              text: qsTr("Cancel")
+              width: 100
+              height: 40
+              onClicked: {
+                  quit()
+              }
+          }
+      }
+
       ButtonGroup { id: rowB }
       ButtonGroup { id: rowC }
       ButtonGroup { id: rowD }
@@ -986,38 +1015,5 @@ MuseScore {
       ButtonGroup { id: rowF }
       ButtonGroup { id: rowG }
   }
-
-  Button {
-    id: buttonCancel
-    text: qsTr("Cancel")
-    anchors.bottom: chordDialog.bottom
-    anchors.right: chordDialog.right
-    anchors.bottomMargin: 10
-    anchors.rightMargin: 10
-    width: 100
-    height: 40
-    onClicked: {
-      quit();
-    }
-  }
-
-  Button {
-    id: buttonOK
-    text: qsTr("OK")
-    width: 100
-    height: 40
-    anchors.bottom: chordDialog.bottom
-    anchors.right:  buttonCancel.left
-    anchors.topMargin: 10
-    anchors.bottomMargin: 10
-    onClicked: {
-      showVals();
-      curScore.startCmd();
-      runsheet();
-      curScore.endCmd();
-      quit();
-    }
-  }
-
 }
 
